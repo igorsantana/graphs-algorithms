@@ -1,44 +1,33 @@
-var Graph = require('../graph');
-var Tree = require('../tree');
-var Vertex = require('../vertex');
-var time = 0;
-function initialize(graph){
-	var arr = [new Vertex('A'),new Vertex('B'),new Vertex('C'),new Vertex('D'),new Vertex('E'),new Vertex('F')];
-	arr[0].addAdjacent([arr[1],arr[4]]);
-	arr[1].addAdjacent([arr[0],arr[2],arr[3],arr[5]]);
-	arr[2].addAdjacent([arr[1],arr[5]]);
-	arr[3].addAdjacent([arr[1]]);
-	arr[4].addAdjacent([arr[0],arr[2]]);
-	arr[5].addAdjacent([arr[1],arr[2]]);
-	arr.forEach(function(elm,index){
-		graph.addVertex(elm);
-	})
-	return graph;
-}
+var graph = require('../openFile')('../graph.tgf');
 
-function profundidade(graph){
-	graph = initialize(new Graph());
-	graph.vertexs.forEach(function(vertex){
-		if(vertex.state == 0){
-			profundidadeVisit(vertex);
+function DFS(graph,top){
+	var vertexs = graph.getAdjacencyList()
+	,	time = 0
+	,	topological = [];
+
+	vertexs.forEach(function(adjacent){
+		if(adjacent.state == "white"){
+			dfsVisit(adjacent);
 		}
 	})
-	console.log(graph.getResum());
-}	
 
-function profundidadeVisit(vertex){
-	time++;
-	vertex.state = 1;
-	vertex.start = time;
-	vertex.edges.forEach(function(auxVertex){
-		if(auxVertex.state == 0){
-			auxVertex.predecessor = vertex;
-			profundidadeVisit(auxVertex);
-		}
-	})
-	vertex.state = 2;
-	time++;
-	vertex.ending = time;
+	function dfsVisit(vertex){
+		time++;
+		vertex.state = 'grey';
+		vertex.startingTime = time;
+				
+		vertex.edges.forEach(function(adjacent){
+			if(adjacent.state == "white"){
+				adjacent.pred = vertex;
+				dfsVisit(adjacent);
+			}
+		})
+		vertex.state = 'black';
+		time++;
+		topological.push(vertex.value);
+		vertex.endingTime = time;
+	}
+	if(top) return topological;
 }
 
-profundidade();
+module.exports = DFS;

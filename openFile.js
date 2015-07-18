@@ -1,40 +1,56 @@
-var fs = require('fs'), endOfLine = require('os').EOL, Graph = require('./Models/Graph');
-module.exports = function(filename){
-	var fileContent = fs.readFileSync(filename, {encoding: 'utf-8'})
-	,	rawFileContent = fileContent.split(endOfLine)
-	,	indexToBreak = rawFileContent.indexOf('#')
-	,	listOfAdjacency
-	,	mountMatrixOfAdjacency
-	,	edges
-	,	from
-	,	to;
+function returnGraph(){
+	var fs = require('fs')
+	, 	endOfLine = require('os').EOL;
+	return function(filename){
+		var Graph = require('./Models/Graph')
+		,	Vertex = require('./Models/Vertex')
+		,	rawFileContent = fs.readFileSync(filename, {encoding: 'utf-8'})
+		,	fileContent = rawFileContent.split(endOfLine)
+		,	indexToBreak = fileContent.indexOf('#')
+		,	listOfAdjacency
+		,	matrixOfAdjacency
+		,	edges
+		,	fromVertex
+		,	toVertex;
 
-	function mountListOfAdjacency(vertex){
-		var aux = vertex.split(' ');
-		return {value: aux[0],label: aux[1],edges: []};
-	}
+		function mountListOfAdjacency(vertex){
+			var aux = vertex.split(' ');
+			return (new Vertex(aux[0],aux[1]));
+		}
 
-	function mountMatrixOfAdjacency(size){
-		var aux = [];
-		aux.length = size;
-		for (var i = 0; i < aux.length; i++){
-			var arr_ = [];
-			arr_.length = size;
-			aux[i] = arr_;
+		// Como javascript não possui vetores de tamanho fixo,
+		// é necessário colocar o tamanho do vetor direto
+		// no atributo length.
+		function mountMatrixOfAdjacency(size){
+			var matrix = [];
+			matrix.length = size;
+			for (var i = 0; i < matrix.length; i++){
+				var arr_ = [];
+				arr_.length = size;
+				matrix[i] = arr_;
+			}
+			return matrix;
 		}
-		return aux;
-	}
-	function finishListOfAdjacency(edges){
-		from = parseInt(edges.split(' ')[0]);
-		to = parseInt(edges.split(' ')[1]);
-		if(!(isNaN(from) || isNaN(to))){
-			matrixOfAdjacency[from-1][to-1] = 1;
-			listOfAdjacency[from -1].edges.push(listOfAdjacency[to-1].label);
+
+		function finishListAndMatrix(edges){
+			fromVertex = parseInt(edges.split(' ')[0]);
+			toVertex = parseInt(edges.split(' ')[1]);
+			if(!(isNaN(fromVertex) || isNaN(toVertex))){
+				matrixOfAdjacency[fromVertex-1][toVertex-1] = 1;
+				listOfAdjacency[fromVertex -1].edges.push(listOfAdjacency[toVertex-1]);
+			}
 		}
+		// Começa a montar a lista de adjacência inserindo todos os vértices em uma lista.
+		listOfAdjacency = fileContent.splice(0, indexToBreak).map(mountListOfAdjacency);
+		// Começa a criar a matriz de adjacência com tamanho |V|.
+		console.log(listOfAdjacency);
+		matrixOfAdjacency = mountMatrixOfAdjacency(listOfAdjacency.length);
+		// Pega todas as arestas que estão após o #.
+		edges = fileContent.splice(1, fileContent.length -1);
+		// Termina de montar a lista de adjacência e a matriz inserindo as arestas.
+		edges.forEach(finishListAndMatrix);
+		// Retorna o grafo.
+		return new Graph(listOfAdjacency,matrixOfAdjacency);	
 	}
-	listOfAdjacency = rawFileContent.splice(0, indexToBreak).map(mountListOfAdjacency);
-	matrixOfAdjacency = mountMatrixOfAdjacency(listOfAdjacency.length);
-	edges = rawFileContent.splice(1, rawFileContent.length -1);
-	edges.forEach(finishListOfAdjacency);
-	return new Graph(listOfAdjacency,matrixOfAdjacency);
 }
+module.exports = returnGraph;

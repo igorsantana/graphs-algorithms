@@ -1,12 +1,11 @@
 var Graph = function(list,matrix){
-	this.list = list;
-	this.matrix = matrix;
+	this.listOfAdjacency = list;
+	this.matrixOfAdjacency = matrix;
+	this.getAdjacencyList = function(){
+		return this.listOfAdjacency;
+	}
+	this.getAdjacencyMatrix = function(){
+		return this.matrixOfAdjacency;
+	}
 };
-
-Graph.prototype.getAdjacencyList = function(){
-	return this.listOfAdjacency;
-}
-Graph.prototype.getAdjacencyMatrix = function(){
-	return this.matrixOfAdjacency;
-}
 module.exports = Graph;
