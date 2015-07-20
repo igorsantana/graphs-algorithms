@@ -19,5 +19,4 @@ function BFS(graph){
 	}
 }
 
-
 module.exports = BFS;

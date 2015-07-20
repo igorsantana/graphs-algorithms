@@ -43,7 +43,7 @@ function returnGraph(){
 		// Começa a montar a lista de adjacência inserindo todos os vértices em uma lista.
 		listOfAdjacency = fileContent.splice(0, indexToBreak).map(mountListOfAdjacency);
 		// Começa a criar a matriz de adjacência com tamanho |V|.
-		console.log(listOfAdjacency);
+		// console.log(listOfAdjacency);
 		matrixOfAdjacency = mountMatrixOfAdjacency(listOfAdjacency.length);
 		// Pega todas as arestas que estão após o #.
 		edges = fileContent.splice(1, fileContent.length -1);
