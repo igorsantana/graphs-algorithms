@@ -3,8 +3,8 @@ function Transposto(graph){
 
 	graph.listOfAdjacency.forEach(function(data){
 		data.edges = data.edges.map(function(adj){
-			obj[adj.value] = obj[adj.value] || [];
-			obj[adj.value].push(data); 
+			obj[adj.vertex.value] = obj[adj.vertex.value] || [];
+			obj[adj.vertex.value].push(data); 
 		})
 	})
 

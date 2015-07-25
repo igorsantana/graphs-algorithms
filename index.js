@@ -4,7 +4,8 @@ var openFile = require('./openFile')
 ,	profundidade = require('./Profundidade/profundidade')
 ,	transposto = require('./Conexo/transposto')
 ,	conexo = require('./Conexo/conexo')
-,	bellmanFord = require('./CaminhosMinimos/bellmanFord');
+,	bellmanFord = require('./CaminhosMinimos/bellmanFord')
+,	dijkstra = require('./CaminhosMinimos/dijkstra');
 
-bellmanFord(graph);
+dijkstra(graph,graph.getAdjacencyList()[1]);
 // console.info(graph.getEdges());

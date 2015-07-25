@@ -38,7 +38,7 @@ function returnGraph(){
 			if(!(isNaN(fromVertex) || isNaN(toVertex))){
 				edgesFromGraph.push({from: listOfAdjacency[fromVertex -1],weight: weight, to: listOfAdjacency[toVertex-1]});
 				matrixOfAdjacency[fromVertex-1][toVertex-1] = 1;
-				listOfAdjacency[fromVertex -1].edges.push(listOfAdjacency[toVertex-1]);
+				listOfAdjacency[fromVertex -1].edges.push({vertex:listOfAdjacency[toVertex-1], weight: weight});
 			}
 		}
 

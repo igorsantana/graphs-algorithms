@@ -17,9 +17,9 @@ function DFS(graph,top){
 		vertex.startingTime = time;
 				
 		vertex.edges.forEach(function(adjacent){
-			if(adjacent.state == "white"){
-				adjacent.pred = vertex;
-				dfsVisit(adjacent);
+			if(adjacent.vertex.state == "white"){
+				adjacent.vertex.pred = vertex;
+				dfsVisit(adjacent.vertex);
 			}
 		})
 		vertex.state = 'black';

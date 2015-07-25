@@ -11,6 +11,7 @@ var Graph = function(list,matrix,edges){
 	this.getAdjacencyMatrix = function(){
 		return this.matrixOfAdjacency;
 	}
+
 };
 module.exports = Graph;
 

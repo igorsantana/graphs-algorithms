@@ -14,11 +14,11 @@ function BFS(graph){
 
 		vertex.edges.forEach(function(adjacent){
 
-			if(adjacent.state == 'white'){
-				adjacent.state = 'grey';
-				adjacent.distance = vertex.distance+1;
-				adjacent.pred = vertex.value;
-				Queue.add(adjacent);
+			if(adjacent.vertex.state == 'white'){
+				adjacent.vertex.state = 'grey';
+				adjacent.vertex.distance = vertex.distance+1;
+				adjacent.vertex.pred = vertex.value;
+				Queue.add(adjacent.vertex);
 			}
 			vertex.state = 'black';
 		})

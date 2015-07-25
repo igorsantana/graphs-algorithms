@@ -9,6 +9,7 @@ function Conexo(graph){
 	})
 
 	stack.forEach(function(index){
+		console.log(index)
 		var node = vertexs[index-1];
 		if(node.state == "white"){
 			dfsVisit(node);
