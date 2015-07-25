@@ -1,9 +1,10 @@
 var openFile = require('./openFile')
-,	graph = openFile()('./graph.tgf')
-,	largura = require('./Largura/largura.js')
+,	graph = openFile()('./anotherGraph.tgf')
+,	largura = require('./Largura/largura')
 ,	profundidade = require('./Profundidade/profundidade')
 ,	transposto = require('./Conexo/transposto')
 ,	conexo = require('./Conexo/conexo')
+,	bellmanFord = require('./CaminhosMinimos/bellmanFord');
 
-// console.log(graph)
-// console.log(conexo(graph));
+bellmanFord(graph);
+// console.info(graph.getEdges());
