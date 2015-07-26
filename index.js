@@ -5,7 +5,8 @@ var openFile = require('./openFile')
 ,	transposto = require('./Conexo/transposto')
 ,	conexo = require('./Conexo/conexo')
 ,	bellmanFord = require('./CaminhosMinimos/bellmanFord')
-,	dijkstra = require('./CaminhosMinimos/dijkstra');
+,	dijkstra = require('./CaminhosMinimos/dijkstra')
+,	floydWarshall = require('./CaminhosMinimos/floydWarshall');
 
-dijkstra(graph,graph.getAdjacencyList()[1]);
+floydWarshall(graph);
 // console.info(graph.getEdges());
