@@ -6,7 +6,8 @@ var openFile = require('./openFile')
 ,	conexo = require('./Conexo/conexo')
 ,	bellmanFord = require('./CaminhosMinimos/bellmanFord')
 ,	dijkstra = require('./CaminhosMinimos/dijkstra')
-,	floydWarshall = require('./CaminhosMinimos/floydWarshall');
+,	floydWarshall = require('./CaminhosMinimos/floydWarshall')
+,	ttl = require('./Maratona/ttl');
 
-floydWarshall(graph);
+console.log(ttl(graph,5,1));
 // console.info(graph.getEdges());
