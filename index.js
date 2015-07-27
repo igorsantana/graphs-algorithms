@@ -1,5 +1,5 @@
 var openFile = require('./openFile')
-,	graph = openFile()('./anotherGraph.tgf')
+,	graph = openFile()('./graphxs.tgf')
 ,	largura = require('./Largura/largura')
 ,	profundidade = require('./Profundidade/profundidade')
 ,	transposto = require('./Conexo/transposto')
@@ -9,5 +9,6 @@ var openFile = require('./openFile')
 ,	floydWarshall = require('./CaminhosMinimos/floydWarshall')
 ,	ttl = require('./Maratona/ttl');
 
-console.log(ttl(graph,5,1));
+
+console.log(profundidade(graph,true));
 // console.info(graph.getEdges());

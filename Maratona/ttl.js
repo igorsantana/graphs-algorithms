@@ -13,7 +13,6 @@ function TTL(graph, x, propag){
 
 		var vertex = Queue.remove();
 		if(vertex.distance <= propag){
-			console.log(vertex.label)
 			count++;
 		}
 

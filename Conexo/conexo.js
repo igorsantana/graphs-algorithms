@@ -7,15 +7,18 @@ function Conexo(graph){
 	vertexs.forEach(function(adjacent){
 		adjacent.state = 'white';
 	})
+console.log(stack)
 
-	stack.forEach(function(index){
-		console.log(index)
-		var node = vertexs[index-1];
+	for(var i = stack.length-1;i>=0;i--){
+
+		var index = stack[i]
+		,node = vertexs[index-1];
+			console.log(node.value)
 		if(node.state == "white"){
 			dfsVisit(node);
 			componentsCount++;
 		}
-	})
+	}
 
 	function dfsVisit(vertex){
 		vertex.state = 'grey';
