@@ -1,6 +1,6 @@
-function BFS(graph,x){
+function BFS(graph,start){
 	var Queue = new (require('../Models/Queue'))
-	,	startVertex = graph.listOfAdjacency[x];
+	,	startVertex = graph.listOfAdjacency[start];
 	
 	startVertex.state = 'grey';
 	startVertex.distance = 0;

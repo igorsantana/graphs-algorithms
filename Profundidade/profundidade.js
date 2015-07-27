@@ -9,7 +9,7 @@ function DFS(graph,top){
 		if(adjacent.state == "white"){
 			dfsVisit(adjacent);
 		}
-	})
+	})	
 
 	function dfsVisit(vertex){
 		time++;

@@ -1,8 +1,9 @@
-function bellmanFord(graph){
+function bellmanFord(graph,vert){
 	var vertexs = graph.getAdjacencyList(),
 		edges = graph.getEdges()
-		first = vertexs[0];	
+		first = vertexs[vert];	
 	first.distance = 0;
+
 	function relax(u,v,w){
 		if(v.distance > (u.distance + w)){
 			v.distance = u.distance + w;
@@ -15,12 +16,10 @@ function bellmanFord(graph){
 			relax(edge.from,edge.to,edge.weight);
 		})
 	}
-	edges.forEach(function(edge){
-		if(edge.to.distance > (edge.from.distance + edge.weight)){
-			return true;
-		}
-	})
-	return false;
+	return edges.filter(function(edge){
+		return (edge.to.distance > (edge.from.distance + edge.weight));
+	}).length > 0;
+	 
 }
 
 

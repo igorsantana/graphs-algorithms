@@ -1,21 +1,21 @@
 function dijkstra(graph,v){
-	var adjList = graph.getAdjacencyList()
-	,relax = require('../CaminhosMinimos/relax');
+	var adjacencyList = graph.getAdjacencyList()
+	,	relax = require('../CaminhosMinimos/relax')
+	,	S = [];
 
-	adjList.forEach(function(data){
+	adjacencyList.forEach(function(data){
 		data.distance = Infinity;
 		data.pred = null;
 	})
+
 	v.distance = 0;
 
-	var S = [];
-
-	while(adjList.length > 0){
-		var u = getMin(adjList);
-		console.log(u)
+	while(adjacencyList.length > 0){
+		var u = getMin(adjacencyList);
 		S.push(u);
 		u.edges.forEach(function(data){
 			relax(u,data);
+			// console.log(data)
 		})
 	}
 
@@ -28,6 +28,7 @@ function dijkstra(graph,v){
 		}
 		return arr.splice(index,1)[0];
 	}
+	return S;
 }
 
 module.exports = dijkstra

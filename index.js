@@ -1,5 +1,5 @@
 var openFile = require('./openFile')
-,	graph = openFile()('./graphxs.tgf')
+,	graph = openFile()('./graphLow.tgf')
 ,	largura = require('./Largura/largura')
 ,	profundidade = require('./Profundidade/profundidade')
 ,	transposto = require('./Conexo/transposto')
@@ -10,5 +10,5 @@ var openFile = require('./openFile')
 ,	ttl = require('./Maratona/ttl');
 
 
-console.log(profundidade(graph,true));
-// console.info(graph.getEdges());
+console.info(bellmanFord(graph,0));
+// console.info(graph.getFormattedAdjacencyList('bellman-ford'));
